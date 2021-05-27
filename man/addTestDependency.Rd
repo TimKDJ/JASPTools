@@ -4,7 +4,7 @@
 \alias{addTestDependency}
 \title{Allows users to add package dependencies to unit testing, specifically to plot testing}
 \usage{
-addTestDependency(dep, modulePath = getPkgOption("module.dirs"))
+addTestDependency(dep, modulePath = getModulePaths())
 }
 \arguments{
 \item{dep}{A single character value of a package name currently installed on your system}

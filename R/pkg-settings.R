@@ -21,10 +21,6 @@
 #' When you run an analysis or test it, jaspTools calls the *installed* version of the module.
 #' This option specifies if the installed version should be reinstalled automatically when you make any changes to your module.
 #'
-#' @details \code{module.dirs}:
-#' The directories that hold the source for the JASP module(s) you are working on.
-#' These module directories are used to find the R functions etc. in \code{runAnalysis} and the various testing functions.
-#'
 #' @return A print of the configurable options.
 #' @export viewPkgOptions
 viewPkgOptions <- function() {
@@ -53,7 +49,7 @@ viewPkgOptions <- function() {
 #' @param value Value the option should be set to.
 #' @examples
 #'
-#' setPkgOption("module.dirs", c("~/Documents/Github/Regression", "~/Document/Github/Frequencies"))
+#' setPkgOption("reinstall.modules", FALSE)
 #'
 #' @export setPkgOption
 setPkgOption <- function(name, value) {
@@ -62,6 +58,12 @@ setPkgOption <- function(name, value) {
 
   if (length(name) > 1)
     stop("Please only set one option at a time")
+
+  if (name == "module.dirs") {
+    warning("Setting the module through `setPkgOption()` is deprecated, please use `setActiveModule`")
+    setActiveModule(value)
+    return(invisible(NULL))
+  }
 
   if (!name %in% names(.pkgenv[["pkgOptions"]]))
     stop(name, " is not a valid option to set")

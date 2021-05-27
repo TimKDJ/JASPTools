@@ -12,7 +12,7 @@ runTestsTravis <- function(modulePath) {
     if (!.isSetupComplete())
       stop("The setup should be completed before the tests are ran")
 
-    setPkgOption("module.dirs", modulePath)
+    setActiveModule(modulePath)
 
     remotes::install_local(modulePath, upgrade = "never", force = FALSE, INSTALL_opts = "--no-multiarch")
 
@@ -200,7 +200,7 @@ testFilesToVdiffrFilter <- function(testFiles) {
 #' addTestDependency("jaspGraphs")
 #'
 #' @export addTestDependency
-addTestDependency <- function(dep, modulePath = getPkgOption("module.dirs")) {
+addTestDependency <- function(dep, modulePath = getModulePaths()) {
   if (!is.character(dep) || length(dep) > 1)
     stop("Expecting single name of a package")
 

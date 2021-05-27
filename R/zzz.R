@@ -2,10 +2,10 @@
   internal   = list(jaspToolsPath     = "",
                     dataset           = "",
                     state             = list(),
+                    modulePaths       = "",
                     modulesMd5Sums    = list()
                ),
-  pkgOptions = list(module.dirs       = "",
-                    reinstall.modules = TRUE,
+  pkgOptions = list(reinstall.modules = TRUE,
                     view.in.rstudio   = TRUE,
                     html.dir          = "",
                     data.dirs         = "",
