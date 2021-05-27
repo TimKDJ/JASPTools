@@ -112,7 +112,7 @@ runAnalysis <- function(name, dataset, options, view = TRUE, quiet = FALSE, make
 fetchRunArgs <- function(name, options) {
   possibleArgs <- list(
     name = name,
-    functionCall = findCorrectFunction(name),
+    functionCall = asNamespacedFunctionCall(name),
     title = "",
     requiresInit = TRUE,
     options = jsonlite::toJSON(options),

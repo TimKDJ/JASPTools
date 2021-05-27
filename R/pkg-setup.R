@@ -336,7 +336,7 @@ isRepoJaspModule <- function(repo, branch) {
   repoTree <- githubGET(asGithubReposUrl("jasp-stats", repo, c("git", "trees", branch), params = list(recursive = "false")))
   if (length(names(repoTree)) > 0 && "tree" %in% names(repoTree)) {
     pathNames <- unlist(lapply(repoTree[["tree"]], `[[`, "path"))
-    return(all(moduleRequisites(sep = "/") %in% pathNames))
+    return(all(sourceModuleRequisites(sep = "/") %in% pathNames))
   }
 
   return(FALSE)
