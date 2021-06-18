@@ -140,7 +140,7 @@ getValidModuleRoot <- function(path) {
       return(NULL)
     path <- parentDir
   }
-  return(path)
+  return(tidyPath(path))
 }
 
 sourceModuleRequisites <- function(sep = .Platform$file.sep) {
@@ -154,4 +154,15 @@ binaryModuleRequisites <- function() {
 hasJaspModuleRequisites <- function(path) {
   all(file.exists(file.path(path, sourceModuleRequisites()))) ||
     all(file.exists(file.path(path, binaryModuleRequisites())))
+}
+
+getModuleDatasetLocations <- function() {
+  dataPaths <- NULL
+  modulePaths <- getModulePaths()
+  for (i in seq_along(modulePaths)) {
+    dataFiles <- list.files(modulePaths[i], "\\.csv$", recursive = TRUE, full.names = TRUE)
+    if (length(dataFiles) > 0)
+      dataPaths <- c(dataPaths, unique(dirname(dataFiles)))
+  }
+  return(dataPaths)
 }

@@ -32,8 +32,8 @@
 
 .initInternalPaths <- function() {
   suppressMessages({
-    setPkgOption("html.dir",  getJavascriptLocation())
-    setPkgOption("data.dirs", getDatasetsLocations())
+    setPkgOption("html.dir",  getJaspDesktopJSLocation())
+    setPkgOption("data.dirs", c(getJaspDesktopDatasetLocation(), getJaspToolsDatasetLocation()))
   })
 }
 

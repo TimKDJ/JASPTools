@@ -77,7 +77,7 @@ setPkgOption <- function(name, value) {
       if (!dir.exists(value[i])) # if the value is not a null value it should be a valid path
         stop("Directory ", value[i], " does not exist")
 
-      value[i] <- gsub("[\\/]$", "", normalizePath(value[i])) # normalize path and strip trailing slashes
+      value[i] <- tidyPath(value[i])
     }
   }
 
