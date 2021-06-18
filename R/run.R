@@ -170,6 +170,8 @@ reinstallChangedModules <- function() {
         pkgload::unload(moduleName, quiet = TRUE)
 
       message("Installing ", moduleName, " from source")
+      suppressWarnings(remotes::install_deps(modulePath, upgrade = "never", INSTALL_opts = "--no-multiarch"))
+      # we use install.packages here because of https://github.com/jasp-stats/jaspTools/pull/14#issuecomment-748112692
       suppressWarnings(install.packages(modulePath, type = "source", repos = NULL, quiet = TRUE, INSTALL_opts = "--no-multiarch"))
 
       if (moduleName %in% installed.packages()) {

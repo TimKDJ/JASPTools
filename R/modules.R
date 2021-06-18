@@ -12,16 +12,13 @@
 monitor <- function(modulePaths = ".", installDeps = TRUE) {
   validModulePaths <- verifyModulePaths(modulePaths)
   if (length(validModulePaths) == 0)
-    stop("No valid module(s) supplied in `modulePaths`. Note that all JASP modules should be valid R packages and have these files: DESCRIPTION, NAMESPACE and inst/Description.qml.")
+    stop("No valid module(s) supplied in `modulePaths`. Note that all JASP modules should be R packages and have these files: DESCRIPTION, NAMESPACE and inst/Description.qml.")
+
+  if (length(validModulePaths) != length(modulePaths))
+    warning("Not all modules supplied in `modulePaths` are valid. Note that all JASP modules should be R packages and have these files: DESCRIPTION, NAMESPACE and inst/Description.qml.")
 
   .setInternal("modulePaths", validModulePaths)
-  message("Monitoring: ", paste(validModulePaths, collapse = ", "))
-
-  if (installDeps) {
-    message("Installing missing dependencies")
-    for (modulePath in validModulePaths)
-      remotes::install_deps(modulePath, upgrade = "never", INSTALL_opts = "--no-multiarch")
-  }
+  message("Now monitoring: ", paste(validModulePaths, collapse = ", "))
 }
 
 asNamespacedFunctionCall <- function(funName) {
